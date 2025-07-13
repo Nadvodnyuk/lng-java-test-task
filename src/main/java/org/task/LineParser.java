@@ -3,6 +3,7 @@ package org.task;
 import java.util.Arrays;
 
 public class LineParser {
+    // проверка строк на корректность и убирание ковычек
     public static String[] parseLineOrReturnNull(String line) {
         if (line == null || line.isEmpty()){
             return null;
