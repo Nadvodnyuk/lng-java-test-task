@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.*;
 
 import static org.task.GroupManager.*;
+import static org.task.GroupSort.*;
 import static org.task.LineParser.parseLineOrReturnNull;
 
 public class Main {
@@ -23,7 +24,6 @@ public class Main {
         int groupLineId = 0;
 
         Map<ValueColumn, Integer> lineElements = new HashMap<>();
-        Map<Integer, List<Integer>> groups = new HashMap<>();
 
         List<String> groupLines = new ArrayList<>();
         List<Integer> parent = new ArrayList<>();
@@ -57,31 +57,11 @@ public class Main {
                 }
             }
 
-            for (int i = 0; i < groupLineId; i++) {
-                int root = findParent(i, parent);
-                List<Integer> groupList = groups.computeIfAbsent(root, k -> new ArrayList<>());
-                groupList.add(i);
-            }
+            Map<Integer, List<Integer>> groups = buildGroups(parent, groupLineId);
 
-            int groupsOverOne = 0;
+            List<List<Integer>> sortedGroups = sortGroups(groups);
 
-            List<List<Integer>> sortedGroups = new ArrayList<>();
-
-            for (List<Integer> group : groups.values()) {
-                if (group.size() > 1) {
-                    groupsOverOne++;
-                }
-                sortedGroups.add(group);
-            }
-
-            //"Сверху расположить группы с наибольшим числом элементов"
-            sortedGroups.sort((g1, g2) -> {
-                int sizeCompare = Integer.compare(g2.size(), g1.size());
-                if (sizeCompare != 0) {
-                    return sizeCompare;
-                }
-                return Integer.compare(g1.get(0), g2.get(0));
-            });
+            int groupsOverOne = countGroupsOverOne(sortedGroups);
 
             int groupNumber = 1;
 
