@@ -43,9 +43,11 @@ public class Main {
 
                     for (int i = 0; i < cols.length; i++){
                         ValueColumn keyElement = new ValueColumn(cols[i], i);
-
+                        if (cols[i].isEmpty()) {
+                            continue;
+                        }
                         // "Если две строчки имеют совпадения непустых значений в одной или более колонках, они принадлежат одной группе"
-                        if (lineElements.containsKey(keyElement) && !cols[i].isEmpty()) {
+                        if (lineElements.containsKey(keyElement)) {
                             int sameElementLine = lineElements.get(keyElement);
                             mergeGroups(groupLineId, sameElementLine, parent, rank);
                         }

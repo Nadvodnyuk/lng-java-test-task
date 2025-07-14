@@ -23,4 +23,12 @@ public class ValueColumn {
     public int hashCode() {
         return Objects.hash(value, columnIndex);
     }
+
+    @Override
+    public String toString() {
+        return "ValueColumn{" +
+                "value='" + value + '\'' +
+                ", columnIndex=" + columnIndex +
+                '}';
+    }
 }

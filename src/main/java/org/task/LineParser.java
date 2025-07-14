@@ -9,7 +9,13 @@ public class LineParser {
             return null;
         }
         String[] cols = line.split(";", -1);
+        for (int i = 0; i < cols.length; i++) {
+            cols[i] = cols[i].trim();
+        }
         for (String col : cols){
+            if (col.isEmpty()) {
+                continue;
+            }
             if (!(col.length() >= 2 && col.startsWith("\"") && col.endsWith("\""))){
                 return null;
             }
@@ -19,7 +25,7 @@ public class LineParser {
             }
         }
         cols = Arrays.stream(cols)
-                .map(col -> col.substring(1, col.length() - 1))
+                .map(col -> col.isEmpty() ? "" : col.substring(1, col.length() - 1))
                 .toArray(String[]::new);
         return cols;
     }
