@@ -20,7 +20,6 @@ public class LineParserTest {
         String line1 = ";;\"b\";\"c\"";
         String line2 = "\"a\";\"b\";";
         String line3 = "\"a\";\"b\";;";
-        String line4 = "\"a\";\"b\";;";
 
         String[] result1 = LineParser.parseLineOrReturnNull(line1);
         String[] result2 = LineParser.parseLineOrReturnNull(line2);
