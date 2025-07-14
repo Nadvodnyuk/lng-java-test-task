@@ -2,12 +2,14 @@ package org.task;
 
 import java.util.*;
 
+import static org.task.GroupManager.findParent;
+
 public class GroupSort {
 
     public static Map<Integer, List<Integer>> buildGroups(List<Integer> parent, int totalLines) {
         Map<Integer, List<Integer>> groups = new HashMap<>();
         for (int i = 0; i < totalLines; i++) {
-            int root = GroupManager.findParent(i, parent);
+            int root = findParent(i, parent);
             groups.computeIfAbsent(root, k -> new ArrayList<>()).add(i);
         }
         return groups;
